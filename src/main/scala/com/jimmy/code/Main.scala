@@ -24,6 +24,16 @@ object Main extends App {
 
   val source: Source[Int, NotUsed] = Source(1 to 100)
 
-  source.runForeach(i => println(i))(materializer)
+  val factorials: Source[BigInt, NotUsed] =
+    source.scan(BigInt(1))((acc, next) => acc * next)
 
+  def lineSink(filename: String): Sink[String, Future[IOResult]] =
+    Flow[String]
+      .map(s => ByteString(s + "\n"))
+      .toMat(FileIO.toPath(Paths.get(filename)))(Keep.right)
+
+  val result: Future[IOResult] = factorials.map(_.toString).runWith(lineSink("factorials.txt"))
+
+  implicit val ec = system.dispatcher
+  result.onComplete(_ => system.terminate())
 }
