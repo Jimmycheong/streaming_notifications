@@ -1,4 +1,4 @@
-package com.jimmy.code
+package com.jimmy.code.tutorials
 
 import akka.stream._
 import akka.stream.scaladsl._
@@ -31,7 +31,7 @@ object ReactiveTweetExample extends App with ReactiveTweetExampleFixture {
 
   import ReactiveTweetExample._
 
-  implicit val actorSystem = ActorSystem("reactive0tweets")
+  implicit val actorSystem = ActorSystem("reactive-tweets")
   implicit val materializer = ActorMaterializer()
 
   val tweets: Source[Tweet, NotUsed] = Source(List(

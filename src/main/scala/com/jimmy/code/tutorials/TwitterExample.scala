@@ -1,4 +1,5 @@
-package com.jimmy.code
+package com.jimmy.code.tutorials
+
 import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer

@@ -1,4 +1,4 @@
-package com.jimmy.code
+package com.jimmy.code.tutorials
 
 import akka.stream._
 import akka.stream.scaladsl._
